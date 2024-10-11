@@ -10,6 +10,29 @@
 #include <dt-bindings/zmk/rgb.h>
 
 / {
+    macros {
+        Front: ChooseFront {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_SHIFT &kp LEFT_COMMAND &kp LEFT>;
+            label = "CHOOSEFRONT";
+        };
+
+        Back: ChooseBack {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_SHIFT &kp LEFT_COMMAND &kp RIGHT>;
+            label = "CHOOSEBACK";
+        };
+
+        PW: PW {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&none &kp LS(C) &kp H &kp O &kp N3 &kp N8 &kp N7 &kp N3 &kp N4 &kp N4 &kp N5 &kp STAR>;
+            label = "PW";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -26,18 +49,18 @@
 &gresc      &kp N1        &kp N2  &kp N3        &kp N4  &kp N5  &kp N6     &kp N7  &kp N8  &kp N9     &kp N0    &kp MINUS  &kp EQUAL  &kp BSLH  &kp DEL
 &kp TAB     &kp Q         &kp W   &kp E         &kp R   &kp T   &kp Y      &kp U   &kp I   &kp O      &kp P     &kp LBKT   &kp RBKT             &kp BACKSPACE
 &lt 1 CAPS  &kp A         &kp S   &kp D         &kp F   &kp G   &kp H      &kp J   &kp K   &kp L      &kp SEMI  &kp SQT                         &kp RET
-&kp LSHFT                 &kp Z   &kp X         &kp C   &kp V   &kp B      &kp N   &kp M   &kp COMMA  &kp DOT   &kp FSLH   &kp RSHFT            &mo 2
+&kp LSHFT                 &kp Z   &kp X         &kp C   &kp V   &kp B      &kp N   &kp M   &kp COMMA  &kp DOT   &kp FSLH   &PW                  &kp CAPSLOCK
 &kp LCTRL   &kp LEFT_ALT          &kp LEFT_GUI                  &kp SPACE                             &kp RALT  &kp RGUI   &mo 2                &kp RCTRL
             >;
         };
 
         SECOND_LAYER {
             bindings = <
-&kp GRAVE  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7    &kp F8    &kp F9     &kp F10  &kp F11  &kp F12  &trans  &trans
-&trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans    &kp UP    &trans     &trans   &trans   &trans           &trans
-&trans     &trans  &trans  &trans  &trans  &trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans   &trans                    &trans
-&trans             &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans     &trans   &trans   &trans           &trans
-&trans     &trans          &trans                  &trans                                 &trans   &trans   &trans           &trans
+&kp GRAVE  &kp F1      &kp F2             &kp F3            &kp F4  &kp F5  &kp F6  &kp F7    &kp F8    &kp F9     &kp F10  &kp F11  &kp F12  &trans  &trans
+&trans     &trans      &kp C_VOLUME_UP    &trans            &trans  &trans  &trans  &Front    &kp UP    &Back      &trans   &trans   &trans           &trans
+&trans     &kp K_MUTE  &kp C_VOLUME_DOWN  &kp K_PLAY_PAUSE  &trans  &trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans   &trans                    &trans
+&trans                 &trans             &trans            &trans  &trans  &trans  &trans    &trans    &trans     &trans   &trans   &trans           &trans
+&trans     &trans                         &trans                            &trans                                 &trans   &trans   &trans           &trans
             >;
         };
 
